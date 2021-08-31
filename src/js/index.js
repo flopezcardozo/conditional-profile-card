@@ -1,3 +1,4 @@
+import { NULL } from "node-sass";
 import "../style/index.scss";
 
 /**
@@ -28,17 +29,40 @@ function render(variables = {}) {
   // if includeCover==false then we reset the cover code without the <img> tag to make the cover transparent.
   let cover = `<div class="cover"><img src="${variables.background}" /></div>`;
   if (variables.includeCover == false) cover = "<div class='cover'></div>";
-
+  let name = "nombre";
+  if (variables.name !== null) {
+    name = variables.name;
+  }
+  let lastname = "apellido";
+  if (variables.apellido !== null) {
+    lastname = variables.apellido;
+  }
+  let socialMediaPosition = "posicionRS";
+  if (variables.posicionRS !== "position-left") {
+    socialMediaPosition = variables.posicionRS;
+  }
+  let role = "profesion";
+  if (variables.role !== null) {
+    role = variables.profesion;
+  }
+  let twitter = "redTwitter";
+  if (variables.twitter !== null) {
+    twitter = variables.redTwitter;
+  }
+  let github = "redGit";
+  if (variables.github !== null) {
+    github = variables.redGit;
+  }
   // reset the website body with the new html output
   document.querySelector("#widget_content").innerHTML = `<div class="widget">
             ${cover}
           <img src="${variables.avatarURL}" class="photo" />
-          <h1>Lucy Boilett</h1>
-          <h2>Web Developer</h2>
+          <h1>${variables.name} ${variables.lastname}</h1>
+          <h2>${variables.role}</h2>
           <h3>Miami, USA</h3>
-          <ul class="position-right">
-            <li><a href="https://twitter.com/alesanchezr"><i class="fa fa-twitter"></i></a></li>
-            <li><a href="https://github.com/alesanchezr"><i class="fa fa-github"></i></a></li>
+          <ul class="${variables.socialMediaPosition}">
+            <li><a href="https://twitter.com/${variables.twitter}"><i class="fa fa-twitter"></i></a></li>
+            <li><a href="https://github.com/${variables.github}"><i class="fa fa-github"></i></a></li>
             <li><a href="https://linkedin.com/alesanchezr"><i class="fa fa-linkedin"></i></a></li>
             <li><a href="https://instagram.com/alesanchezr"><i class="fa fa-instagram"></i></a></li>
           </ul>
@@ -61,7 +85,7 @@ window.onload = function() {
     socialMediaPosition: "position-left",
     // social media usernames
     twitter: null,
-    github: "alesanchezr",
+    github: null,
     linkedin: null,
     instagram: null,
     name: null,
